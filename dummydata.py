@@ -37,7 +37,7 @@ alphabet = []
 for alp in range(97, 123):
     alphabet.append(chr(alp))
 
-wb = webdriver.Chrome("/home/manzars/Downloads/chromedriver")
+wb = webdriver.Chrome(<path to chrome driver in your machine>)
 disease_url = "https://www.nhp.gov.in/disease-a-z/"
 disease = []
 for i in alphabet:
