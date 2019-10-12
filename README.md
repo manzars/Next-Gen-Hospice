@@ -3,4 +3,4 @@ Hospice (Hospital Management System): A web app where Hospital staff can login a
 # Accessing Dummy data
 1. run dummy data.py
 2. rundataset.py
-one file namely HospiceDummyData will be created in your currenr directory which is nothing but the dummy data of Hospice
+3. One file namely HospiceDummyData will be created in your currenr directory which is nothing but the dummy data of Hospice
