@@ -8,8 +8,67 @@ Created on Tue Dec 17 13:39:53 2019
 import pandas
 import numpy as np
 import sqlalchemy
+from sqlalchemy import event
 
 #reading CSV
+
+disease_cost = {
+        'fever': 1000,
+        'cbc': 300,
+        'maleria': 1500,
+        'Pneumonia': 1000,
+        'abdomen pain': 1200,
+        'Pseudomonas aeruginosa': 7656,
+        'dengue fever': 1500,
+        'Influenza': 3330,
+        'Tuberculosis': 4000,
+        'Adhesive Pericapsulitis': 2000,
+        'Klebsiella': 4400,
+        'Cardiac arrhythmias': 3000,
+        'Mycobacterium abscessus': 2300,
+        'Congestive heart failure': 4000,
+        'Norovirus': 3000,
+        'none': 0,
+        }
+
+test_cost = {
+        'fever': 200,
+        'cbc': 100,
+        'maleria': 2000,
+        'Pneumonia': 1000,
+        'abdomen pain': 220,
+        'Pseudomonas aeruginosa': 840,
+        'dengue fever': 3300,
+        'Influenza': 2200,
+        'Tuberculosis': 2000,
+        'Adhesive Pericapsulitis': 1500,
+        'Klebsiella': 840,
+        'Cardiac arrhythmias': 3320,
+        'Mycobacterium abscessus': 3040,
+        'Congestive heart failure': 3350,
+        'Norovirus': 2270,
+        'none': 0,
+        }
+
+medicine_cost = {
+        'fever': 250,
+        'cbc': 300,
+        'maleria': 4000,
+        'Pneumonia': 2000,
+        'abdomen pain': 400,
+        'Pseudomonas aeruginosa': 2000,
+        'dengue fever': 6050,
+        'Influenza': 6070,
+        'Tuberculosis': 3300,
+        'Adhesive Pericapsulitis': 1200,
+        'Klebsiella': 4500,
+        'Cardiac arrhythmias': 1200,
+        'Mycobacterium abscessus': 1500,
+        'Congestive heart failure': 1500,
+        'Norovirus': 3900,
+        'none': 0,
+        }
+
 data = pandas.read_excel('hospice-data.xlsv')
 
 #calculating number of days
@@ -46,6 +105,26 @@ data['BloodGroup'] = np.random.choice(["O+", "O-", "A+", "A-", "B+", "B-", "AB+"
 
 #adding Previous disease to database
 data['PreviousDisease'] = np.random.choice(["fever", "dengue fever", "Influenza", "maleria", "Tuberculosis", "none", "none", "none", "none"], data.shape[0])
+
+data['MedBill'] = np.random.choice([None,  None], data.shape[0])
+wardCharge = 1000
+for i in range(data.shape[0]):
+    if(data['dateDiff'][i] == 0):
+        print(((data['dateDiff'][i] + 1) * wardCharge) + disease_cost[data.Disease[i]] + (disease_cost[data.Disease[i]] * (data['dateDiff'][i] + 1)))
+        data['MedBill'][i] = ((data['dateDiff'][i] + 1) * wardCharge) + disease_cost[data.Disease[i]] + (disease_cost[data.Disease[i]] * (data['dateDiff'][i] + 1)) 
+    else:
+        print(((data['dateDiff'][i]) * wardCharge) + disease_cost[data.Disease[i]] + (disease_cost[data.Disease[i]] * (data['dateDiff'][i])))
+        data['MedBill'][i] = ((data['dateDiff'][i]) * wardCharge) + disease_cost[data.Disease[i]] + (disease_cost[data.Disease[i]] * (data['dateDiff'][i])) 
+
+data['LabBill'] = np.random.choice([None,  None], data.shape[0])
+for i in range(data.shape[0]):
+    data['LabBill'][i] = medicine_cost[data.Disease[i]] + test_cost[data.Disease[i]]
+    print(medicine_cost[data.Disease[i]] + test_cost[data.Disease[i]])
+    
+data['TotalBill'] = np.random.choice([None,  None], data.shape[0])
+for i in range(data.shape[0]):
+    data['TotalBill'][i] = data['MedBill'][i] + data['LabBill'][i]
+    print(data['MedBill'][i] + data['LabBill'][i])
 
 #making copy of newly created csv file for training purpose
 data.to_csv("final_hospice_data.csv")
@@ -98,11 +177,22 @@ data.rename(columns={
         "DischargeDate": "dischargeDate",
         "IsCritical": "isCritical",
         "Disease": "diseaseId",
-        "PreviousDisease": "previousDiseaseId"
+        "PreviousDisease": "previousDiseaseId",
+        "MedBill": "medBill",
+        "LabBill": "labBill",
+        "TotalBill": "totalBill",
         }, inplace = True)
+
+
+
 
 #connecting Database with python script
 engine = sqlalchemy.create_engine('mysql+pymysql://root:@localhost:3306/hospice')
+
+def add_own_encoders(conn, cursor, query, *args):
+    cursor.connection.encoders[np.int32] = lambda value, encoders: int(value)
+
+event.listen(engine, "before_cursor_execute", add_own_encoders)
 
 #forwarding data from here to database
 data.to_sql(
