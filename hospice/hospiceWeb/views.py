@@ -111,6 +111,7 @@ def dataFetchFromSQL(idd):
     mycursor.execute("USE hospice")
     mycursor.execute("SELECT * FROM `admission` WHERE IPNo = '" + idd +"'")
     data = mycursor.fetchone()
+    print(data)
     
     mycursor.execute("SELECT * FROM `gender` WHERE id = '" + str(data[1]) +"'")
     gender = mycursor.fetchone()[1]
@@ -130,7 +131,7 @@ def dataFetchFromSQL(idd):
     
     mycursor.execute("SELECT * FROM `bloodgroup` WHERE id = '" + str(data[5]) +"'")
     b_group = mycursor.fetchone()[1]
-    return [is_critical, disease, gender, b_group, p_disease], data[6].date()
+    return [is_critical, disease, gender, b_group, p_disease], data[6].date(), str(data[13]), str(data[14]), str(data[15]), disease, gender
 
 
 # Create your views here.
@@ -141,7 +142,7 @@ def hospices(request):
     if request.method=='POST':
         IPNo = request.POST['PId']
 
-        data, date = dataFetchFromSQL(IPNo)
+        data, date, name, email, phone, disease, gender = dataFetchFromSQL(IPNo)
         data = np.asarray(data).reshape(1, -1)
 
         data[:, 0] = labelencoder0.transform(data[:, 0])
@@ -177,12 +178,12 @@ def hospices(request):
         if(len(day(op)) == 2):
             start = date + timedelta(days = day(op)[0])
             end = date + timedelta(days = day(op)[1])
-            data = {"ip": all_patient, "IPNo": IPNo, "total": total, "price_lab": abs(price_lab), "price": abs(price), "date": day(op), "submit": "block", "start": str(start.strftime("%d/%m/%Y")), "end": str(end.strftime("%d/%m/%Y"))}
+            data = {"gender": gender, "name": name, "phone": phone, "email": email, "disease": disease, "ip": all_patient, "IPNo": IPNo, "total": total, "price_lab": abs(price_lab), "price": abs(price), "date": day(op), "submit": "block", "start": str(start.strftime("%d/%m/%Y")), "end": str(end.strftime("%d/%m/%Y"))}
             # print("hello", type(start))
             return render(request, 'hospiceweb/basic.html', data)
         else:
             start = date + timedelta(days = day(op)[0])
-            data = {"ip": all_patient, "IPNo": IPNo, "total": total, "price_lab": abs(price_lab), "price": abs(price), "date": day(op), "submit": "block", "start": str(start.strftime("%d/%m/%Y")), "end": "NaN"}
+            data = {"gender": gender, "name": name, "phone": phone, "email": email, "disease": disease, "ip": all_patient, "IPNo": IPNo, "total": total, "price_lab": abs(price_lab), "price": abs(price), "date": day(op), "submit": "block", "start": str(start.strftime("%d/%m/%Y")), "end": "NaN"}
             return render(request, 'hospiceweb/basic.html', data)
     else:
         return render(request, 'hospiceweb/basic.html', data)
