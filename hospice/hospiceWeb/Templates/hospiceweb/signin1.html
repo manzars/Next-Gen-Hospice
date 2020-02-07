@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {% load static %}
+    <link rel = "stylesheet" href = "{% static 'css/login.css' %}"
+    <title></title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light heading fixed-top">
+        <a class="navbar-brand text-white" href="{%url 'hospice'%}"><b>Hospice</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      
+      
+
+
+
+
+    </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="text-center mt-5 mx-auto main-head"><b>Admin Login</b></header>
+        <div class="jumbotron mt-4 jumbo1">
+        	<div class="container  col-lg-6">
+        		<div class="jumbotron jumbo2 mt-4">
+        			
+        			<form method='POST' action = "">
+        				{% csrf_token %}
+        				<div class="col-sm-12">
+        					<h2 class="head1 mb-4 mt-1">Login ...</h2>
+
+              <div class="form-group">
+              <label for="exampleInputEmail1" class="log-label">Username</label>
+            <input type="text" class="form-control" id="username" placeholder="Username" name="username" autocomplete="off">
+           <span id="usercheck"></span>         
+          </div>
+						  <div class="form-group">
+						    <label for="exampleInputPassword1" class="log-label">Password</label>
+						    <input type="password" class="form-control" placeholder="password" id="exampleInputPassword1" name="password" required>
+						  </div>
+                          <h5 id="passcheck"></h5>   
+						  <button type="submit" class="btn btn-primary mt-2" id="login-btn">Submit</button>
+						</div>
+        			</form>
+        		</div>
+        	</div>
+        </div>
+    </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
+        </script>
+
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+    $('#usercheck').hide();
+    $('#passcheck').hide();
+
+    var user_error = true;
+    var pass_error = true;
+
+    $('#username').keyup(function(){
+        username_check();
+    });
+
+    function username_check(){
+
+        var user_val = $('#username').val();
+
+        if(user_val.length == ''){
+            $('#usercheck').show();
+            $('#usercheck').html("Please fill out the username field");
+            $('#usercheck').focus();
+            $('#usercheck').css("color","red")
+            user_error = false;
+            return false;
+        }
+        else{
+            $('#usercheck').hide();
+        }
+
+        if(!(user_val.length >=3 && user_val.length <=10)){
+            $('#usercheck').show();
+            $('#usercheck').html("username should be between 3 to 10");
+            $('#usercheck').focus();
+            $('#usercheck').css("color","red")
+            user_error = false;
+            return false;
+        }
+        else{
+            $('#usercheck').hide();
+        }
+
+    }
+
+});
+
+
+</script>
+
+    </body>
+    </html>

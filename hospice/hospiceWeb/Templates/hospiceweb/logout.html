@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {% load static %}
+    <link rel = "stylesheet" href = "{% static 'css/logout.css' %}">
+    <title></title>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light heading fixed-top">
+        <a class="navbar-brand text-white" href="{%url 'hospice'%}"><b>Hospice</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+    </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="text-center mt-5 mx-auto main-head"><b>Thank You!</b></header>
+        <div class="jumbotron mt-4 jumbo1">
+        	<div class="container  col-lg-6">
+        		<div class="jumbotron jumbo2 mt-4">
+        			
+        			<form method='POST' action = "">
+        				{% csrf_token %}
+        				<div class="col-sm-12">
+        					<h2 class="head1 mb-4 mt-1" id = "success-change">User "{{ name }}" is Successfully Logged out!</h2>
+ 
+
+              <div class="form-group">
+              
+          </div>
+
+
+						  <button type="submit" class="btn btn-primary mt-2" id = "log1"><a class="nav-link" href="{% url 'signin' %}" id = "log">Login again!</button>
+						</div>
+        			</form>
+        		</div>
+        	</div>
+        </div>
+    </div>
+
+    </body>
+    </html>

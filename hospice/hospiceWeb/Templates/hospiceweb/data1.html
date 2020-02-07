@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    {% load static %}
+    <link rel = "stylesheet" href = "{% static 'css/data.css' %}"
+    <title></title>
+</head>
+
+
+
+
+
+
+<body>
+        <nav class="navbar navbar-expand-lg navbar-light heading fixed-top">
+        <a class="navbar-brand text-white" id='jam' href="{%url 'hospice'%}"><b>Hospice</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+      
+      {%if user.is_authenticated%}
+      <li class="nav-item ">
+        <a class="nav-link" href = "{% url 'logout' %}" id = "log" title = "Click to logout"><b>Logout</b></a>
+      </li>
+        {%else%}
+      <li class="nav-item ">
+        <a class="nav-link" href = "{% url 'signin' %}" id = "log" ><b>Login</b></a>
+      </li>
+      {%endif%}
+
+
+
+
+    </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="text-center mt-5 mx-auto main-head"><b>Patient Entry</b></header>
+        <div class="jumbotron mt-4 jumbo1">
+
+
+        	<form method="POST">
+            {% csrf_token %}
+        	<div class="container">
+                <div id="usual">
+                    <div class="jumbotron jumbo2 mt-4 mx-4">
+              <p class="head1 mb-5">Patient Details</p>
+                         <div class="row">
+
+                        	
+                            <div class="col col-sm-6 col-md-6">
+
+                            	<div class="jumbotron jumbo4">
+                            		<h1 class="head mt-2">Patient Medical Details</h1>
+                                
+                                    <div class="form-group row mt-4">
+
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Admission Date: <sup id="sup">*</sup> </label>
+                                        <div class="col-sm-8">
+                                            <input type="date" name = "admissionDate" class="form-control picker" id="colFormLabel" placeholder=" Ex: 04 March 2017" required>
+                                        </div>
+
+                                    </div>
+
+                                    
+
+                                    <div class="form-group row">
+                                        <label for="colFormLabel exampleFormControlSelect1" class="col-sm-4 col-form-label">Disease: <sup id="sup">*</sup></label>
+                                        <div class="col-sm-8">
+                                         <!-- <input type="text" class="form-control" id="colFormLabel" placeholder="Expected Medical Bill" value=""> -->
+                                         <select class="form-control" name = "disease" id="exampleFormControlSelect1" required>
+                                         	<option value="">Select disease</option>
+										      <option value="1">fever</option>
+										      <option value="2">abdomen pain</option>
+										      <option value="3">dengue fever</option>
+										      <option value="4">cbc</option>
+										      <option value="5">Adhesive Pericapsulitis</option>
+										      <option value="6">maleria</option>
+										      <option value="7">Pneumonia</option>
+										      <option value="8">Cardiac arrhythmias</option>
+										      <option value="9">Congestive heart failure</option>
+										      <option value="10">Norovirus</option>
+										      <option value="11">Mycobacterium abscessus</option>
+										      <option value="12">Klebsiella</option>
+										      <option value="13">Influenza</option>
+										      <option value="14">Pseudomonas aeruginosa</option>
+										      <option value="15">Tuberculosis</option>
+										    </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Previous Disease: <sup id="sup">*</sup></label>
+                                        <div class="col-sm-8">
+                                            
+
+                                            <!-- <input type="text" class="form-control" id="colFormLabel" placeholder="Expected Total Bill" value=""> -->
+                                            <select class="form-control" name = "previousDisease" id="exampleFormControlSelect1" required>
+                                            	<option value="">Select previous disease if any</option>
+										      <option value="1">fever</option>
+										      <option value="3">dengue fever</option>
+										      <option value="6">maleria</option>
+										      <option value="13">Influenza</option>
+										      <option value="15">Tuberculosis</option>
+										      <option value="16">none</option>
+										    </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Conditions: <sup id="sup">*</sup></label>
+                                        <div class="col-sm-8">
+                                            <!-- <input type="text" class="form-control" id="colFormLabel" placeholder="Expected Laboratory Bill" value=""> -->
+                                            <select class="form-control" name = "condition" id="exampleFormControlSelect1" required>
+                                            	<option value="">Select condition</option>
+											      <option value="1">Critical</option>
+											      <option value="0">Normal</option>
+											      
+											    </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Blood Group: <sup id="sup">*</sup></label>
+                                        <div class="col-sm-8">
+                                            <!-- <input type="text" class="form-control" id="colFormLabel" placeholder="Expected Total Bill" value=""> -->
+                                            <select class="form-control" name = "bloodGroup" id="exampleFormControlSelect1" required>
+                                            	<option value="">Select blood group</option>
+										      <option value="1">O+</option>
+										      <option value="2">O-</option>
+										      <option value="3">A+</option>
+										      <option value="4">A-</option>
+										      <option value="5">B+</option>
+										      <option value="6">B-</option>
+										      <option value="7">AB+</option>
+										      <option value="8">AB-</option>
+										    </select>
+                                        </div>
+                                    </div>
+                                    
+                                    
+                                
+
+                            </div>
+                           
+                            </div>
+                        
+                        
+                            <div class="col col-sm-6 col-md-6">
+                            	<div class="jumbotron jumbo3">
+                            		<h1 class="head mt-2">Patient Personal Details</h1>
+                            	  
+                                    <div class="form-group row mt-4">
+
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Name: <sup id="sup">*</sup></label>
+                                        <div class="col-sm-8">
+                                            <input type="text"  name = "name" class="form-control" id="colFormLabel" placeholder="Name" required>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <label for="colFormLabel exampleFormControlSelect1" class="col-sm-4 col-form-label">Gender: <sup id="sup">*</sup> </label>
+                                        <div class="col-sm-8">
+                                            <!-- <input type="text" class="form-control" id="colFormLabel" placeholder="Discharge Date" value=""> -->
+                                            <select class="form-control" name = "gender" id="exampleFormControlSelect1" required>
+                                            	<option value="">Select gender</option>
+										      <option value="1">Male</option>
+										      <option value="2">Female</option>
+										     
+										    </select>
+                                        </div>
+
+                                    </div>  
+
+                                    
+
+                              <div class="form-group row mt-4">
+
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Address: </label>
+                                        <div class="col-sm-8">
+                                            <textarea type="textarea" name = "address" class="form-control" id="colFormLabel" placeholder="Address" rows = 1 required></textarea>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row mt-4">
+
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Email: <sup id="sup">*</sup></label>
+                                        <div class="col-sm-8">
+                                            <input type="text" name = "email" class="form-control" id="colFormLabel" placeholder="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" required>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row mt-4">
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Mobile no: <sup id="sup">*</sup></label>
+                                        <div class="col-sm-8">
+                                            <input type="tel" title = "mobile" name = "mobile" class="form-control" id="colFormLabel" placeholder="Mobile no" pattern="[0-9]{12}" required>
+                                        </div>
+                                    </div>
+                                
+                                        </div>
+                                    </div>
+                                
+                        </div>
+                        <center>  <button class="btn btn-primary " type="submit">Submit Details</button></center>
+                        </div>
+                    </div>
+                </div>
+            </form>
+</div>
+            </div>
+        </div>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+
+
+ <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript">
+ </script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+
+<script>
+
+$(function(){
+    var dtToday = new Date();
+    
+    var month = dtToday.getMonth() + 1;
+    var day = dtToday.getDate();
+    var year = dtToday.getFullYear();
+    if(month < 10)
+        month = '0' + month.toString();
+    if(day < 10)
+        day = '0' + day.toString();
+    
+    var maxDate = year + '-' + month + '-' + day;
+    $('.picker').attr('max', maxDate);
+});
+
+</script
+
+</body>
+</html>
+

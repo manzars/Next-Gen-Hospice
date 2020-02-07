@@ -1,0 +1,333 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel = "stylesheet" href = "{% static 'css/basic.css' %}">
+    <title></title>
+</head>
+<style>
+
+#usual {
+    display: {{ submit }};
+}
+
+</style>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light heading fixed-top">
+        <a class="navbar-brand text-white" href="{%url 'hospice'%}"><b>Hospice</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+    <ul class="navbar-nav mr-auto">
+      
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'data'%}" id = "changes" title = "Click to create new patient entry">Data</a>
+      </li>
+      </ul>
+
+   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav ml-auto">
+        
+      {%if user.is_authenticated%}
+      <li class="nav-item ">
+        <a class="nav-link" href="{% url 'logout' %}" id = "log" title = "Click to logout"><b>Logout</b></a>
+      </li>
+        {%else%}
+      <li class="nav-item ">
+        <a class="nav-link" href="{% url 'signin' %}" id = "log"><b>Login</b></a>
+      </li>
+      {%endif%}
+      
+
+
+
+
+    </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <header class="text-center mt-5 mx-auto main-head"><b>Patient Enquiry</b></header>
+        <div class="jumbotron mt-4 jumbo1">
+
+            <form class="form-inline mt-1" method='POST' id="idForm">
+                {% csrf_token %}
+                
+                <div class="form-group mx-auto">
+                
+                    <label for="" class="PID">Enter Patient Id:</label>
+                    <input type="text" id="disabledTextInput" class="form-control mx-sm-4" placeholder="Ex : IP-x-xxxxxxxx" name="PId" value="{{ IPNo }}">
+                    <button type="submit" class="btn btn-primary my-sm-2 center" id="button">Search</button>
+                    <button type="button" class="btn btn-danger my-sm-2 center ml-3" id="clear">Clear</button>
+           
+                
+                </div>
+
+            </form>
+
+            <div class="container">
+                <div id="usual">
+                    <div class="jumbotron jumbo2 mt-4 mx-4">
+              <p class="head1 mb-5">Patient Details</p>
+              <div class='row'>
+                <canvas id="myChart" width="400" height="150"></canvas>
+              </div>
+                         <div class="row">
+
+                        	
+                            <div class="col col-sm-6 col-md-6">
+
+                            	<div class="jumbotron jumbo4 mt-5">
+                            		<h1 class="head mt-2">Expected Discharge Date & Billing Info</h1>
+                                <form class="">
+                                    <div class="form-group row mt-4">
+
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Admission Date: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="Discharge Date" value="{{ admissionDate }}" disabled>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row">
+
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Discharge Date: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="Discharge Date" value="{{ start }}   -   {{ end }}" disabled>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Expected Medical Bill: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="Expected Medical Bill" value="INR {{ price }}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Expected Laboratory Bill: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="Expected Laboratory Bill" value="INR {{ price_lab }}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Expected Total Bill: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="Expected Total Bill" value="INR {{ total }}" disabled>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                           
+                            </div>
+                        
+                        
+                            <div class="col col-sm-6 col-md-6">
+
+                            	<div class="jumbotron jumbo3 mt-5">
+                            		<h1 class="head mt-2">Patient Information and Personal Details</h1>
+                            	  <form class="">
+                                    <div class="form-group row mt-4">
+
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Name: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="Name" value="{{ name }}" disabled>
+                                        </div>
+
+                                    </div>
+
+                              <div class="form-group row mt-4">
+
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Disease: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="Disease" value="{{ disease }}" disabled>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row mt-4">
+
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Email: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="Email" value="{{ email }}" disabled>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="form-group row mt-4">
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Sex: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="Sex" value="{{ gender }}" disabled>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mt-4">
+                                        <label for="colFormLabel" class="col-sm-4 col-form-label">Mobile no: </label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="colFormLabel" placeholder="Mobile no" value="{{ phone }}" disabled>
+                                        </div>
+                                    </div>
+                                 </form>
+                                        </div>
+                                    </div>
+                                
+                               
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js" type="text/javascript"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js" type="text/javascript"></script>
+<script>
+
+$(document).ready(function() {
+
+    $(':input[type="submit"]').prop('disabled', true);
+    $(".forname").css("display", "none");
+
+});
+
+$('#disabledTextInput').keyup(function() {
+    if ($(this).val() == '') {
+        $(':input[type="submit"]').prop('disabled', true);
+    }
+});
+
+$("#disabledTextInput").keyup(function() {
+
+    if ($(this).val() == "") {
+        $("#usual").css("display", "none")
+    }
+
+});
+
+    var all_patient = {{ ip|safe }}
+    var x = {{ p|safe }}
+
+
+    $("#disabledTextInput").keyup(function(){
+    
+    vall = $(this).val()
+    if(vall in x){
+        $(':input[type="submit"]').prop('disabled', false);
+    }else{
+        $(':input[type="submit"]').prop('disabled', true);
+    }
+
+    });
+
+//autocomplete create then search is not disabled
+$( "#disabledTextInput" ).on( "autocompletecreate", function( event, ui ) {
+    $(':input[type="submit"]').prop('disabled', false);
+});
+
+//focus
+$( "#disabledTextInput" ).on( "autocompletefocus", function( event, ui ) {
+    
+});
+
+
+//when selected from autocomplete items search is not disabled
+$( "#disabledTextInput" ).on( "autocompleteselect", function( event, ui ) {
+    $(':input[type="submit"]').prop('disabled', false);
+});
+
+
+//replacement for jquery for autocomplete suggestions
+$( "#disabledTextInput" ).autocomplete({
+    source: {{ ip|safe }},
+    minLength: 1
+});
+
+
+//clear button
+$('#clear').click(function(){
+    $('#disabledTextInput').val('');
+    $("#usual").css("display", "none");
+    $(':input[type="submit"]').prop('disabled', true);
+});
+
+var patient = {{ patient|safe  }} 
+var datediff = {{ datediff|safe }}
+var chart_name = {{ chart_name|safe }}
+
+
+var ctx = document.getElementById('myChart').getContext('2d');
+
+var myChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: chart_name,
+        datasets: [{
+            label: 'Data of recent Patients',
+            data: datediff,
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        responsive: true,
+        scales: {
+            xAxes: [ {
+scaleLabel: {
+display: true,
+labelString: 'Name of Patients',
+fontColor: 'black',
+fontFamily: 'Andale Mono',
+fontSize: '17',
+
+}}],
+            yAxes: [{
+                scaleLabel: {
+display: true,
+labelString: 'No. of Days',
+fontColor: 'black',
+fontFamily: 'Andale Mono',
+fontSize: '17',
+},
+                ticks: {
+                    beginAtZero: true,
+                    
+                }
+            }]
+        }
+    }
+});
+
+</script>
+
+
+</body>
+
+</html>

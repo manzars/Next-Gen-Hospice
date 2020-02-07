@@ -1,0 +1,43 @@
+.jumbo1 {
+    background-color: #563d7c;
+    color: white;
+
+}
+
+.jumbo2 {
+    background-color: #f2f2f2;
+    color: white;
+    box-shadow:  0px 0px 10px 0px #000;
+}
+
+.log-label {
+    color: #000000;
+}
+
+.head1{
+    font-size: 35px;
+    margin-top: -30px;
+    color: #000000;
+
+}
+
+.main-head{
+    padding-top: 30px;
+}
+
+header {
+    font-size: 30px;
+    color: #333333;
+}
+
+ .heading {
+    background-color: #563d7c;
+}
+
+#sup {
+    color: red;
+}
+
+#log {
+    color: white;
+    }

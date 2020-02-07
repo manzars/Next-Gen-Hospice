@@ -1,0 +1,166 @@
+.jumbo1 {
+    background-color: #563d7c;
+    color: white;
+}
+
+.jumbo2 {
+    background-color: #f2f2f2;
+    color: white;
+    box-shadow:  0px 0px 10px 0px #000;
+}
+
+.jumbo3{
+    background-color: white;
+    padding-top:30px !important;
+    border-radius: 20px;
+    border: 0.5px solid black !important;
+    border-width: 350px;
+    padding-bottom: 135px;
+    box-shadow: 0px 0px 4px 0px #000;
+}
+
+.jumbo4{
+    background-color: white;
+    padding-top:30px !important;
+    border: 0.5px solid black !important;
+    border-right: 60px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 4px 0px #000;
+
+
+}
+
+.col-form-label {
+    color: #000000;
+    margin-bottom: 5px;
+}
+
+.radio {
+    text-align: center;
+}
+
+.head {
+    margin-top: -30px;
+    font-size: 25px;
+    text-align: center;
+    color: #000000;
+
+}
+
+.head1{
+    font-size: 35px;
+    margin-top: -30px;
+    text-align: center;
+    color: #000000;
+
+}
+
+.main-head{
+    padding-top: 30px;
+}
+
+.container {
+    align-items: center;
+}
+
+.col-sm-8 {
+    padding-top: 13px;
+}
+
+#manzar {
+    background-color: #ffffff;
+}
+
+header {
+    font-size: 30px;
+    color: #333333;
+}
+
+.PID {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.heading {
+    background-color: #563d7c;
+}
+
+.ui-autocomplete {
+    max-height: 35vh;
+    overflow-y: auto;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    float: left;
+    display: none;
+    min-width: 160px;
+    padding: 4px 0;
+    margin: 0 0 10px 25px;
+    list-style: none;
+    background-color: #ffffff;
+    border-color: #ccc;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-style: solid;
+    border-width: 1px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    *border-right-width: 2px;
+    *border-bottom-width: 2px;
+}
+
+
+.ui-menu-item > a.ui-corner-all {
+    display: block;
+    padding: 3px 15px;
+    clear: both;
+    font-weight: normal;
+    line-height: 18px;
+    color: #555555;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+.ui-state-hover,
+.ui-state-active {
+    color: #ffffff;
+    text-decoration: none;
+    background-color: #d0cece;
+    border-radius: 0px;
+    -webkit-border-radius: 0px;
+    -moz-border-radius: 0px;
+    background-image: none;
+}
+
+#it{
+    #border: 2px  solid white;
+    color: white;
+    text-size : 10px;
+}
+
+#log {
+    color: white;
+    border-color: white;
+    font-size:20px;
+}
+.navbar-brand{
+    font-size:20px !important;
+}
+
+#changes{
+    font-size: 20px;
+    font-weight: bold;
+    color: yellow;
+}
+
+#myChart{
+    padding-left: 25px;
+    padding-right: 25px;
+} 
