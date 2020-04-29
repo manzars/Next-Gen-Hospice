@@ -14,10 +14,11 @@ from time import gmtime, strftime, localtime
 import random
 
 mydb = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  passwd=""
-)
+        host="django-hospice.cljfgmgwfhdv.us-east-2.rds.amazonaws.com",
+        user="django_hospice",
+        passwd="qiatknQQey3ZVDU",
+        auth_plugin='mysql_native_password'
+    )
 
 main = mydb.cursor()
 main.execute("USE hospice")
@@ -113,9 +114,10 @@ def day(op):
 
 def generateJSON(pid):
     mydbs = mysql.connector.connect(
-      host="localhost",
-      user="root",
-      passwd=""
+        host="django-hospice.cljfgmgwfhdv.us-east-2.rds.amazonaws.com",
+        user="django_hospice",
+        passwd="qiatknQQey3ZVDU",
+        auth_plugin='mysql_native_password'
     )
     mycursor = mydbs.cursor()
     mycursor.execute("USE hospice")
@@ -146,9 +148,10 @@ def generateJSON(pid):
 def dataFetchFromSQL(idd):
 
     mydbs = mysql.connector.connect(
-      host="localhost",
-      user="root",
-      passwd=""
+        host="django-hospice.cljfgmgwfhdv.us-east-2.rds.amazonaws.com",
+        user="django_hospice",
+        passwd="qiatknQQey3ZVDU",
+        auth_plugin='mysql_native_password'
     )
 
     mycursor = mydbs.cursor()
@@ -180,10 +183,11 @@ def dataFetchFromSQL(idd):
 
 def data_entry(addmissionDate, disease, p_disease, condition, bloodGroup, name, gender, address, email, mobile):
   mydbs = mysql.connector.connect(
-  host="localhost",
-  user="root",
-  passwd=""
-  )
+        host="django-hospice.cljfgmgwfhdv.us-east-2.rds.amazonaws.com",
+        user="django_hospice",
+        passwd="qiatknQQey3ZVDU",
+        auth_plugin='mysql_native_password'
+    )
   
   
   flag = True
@@ -238,9 +242,10 @@ def data(request):
 def hospices(request):
 
     mydbs = mysql.connector.connect(
-      host="localhost",
-      user="root",
-      passwd=""
+        host="django-hospice.cljfgmgwfhdv.us-east-2.rds.amazonaws.com",
+        user="django_hospice",
+        passwd="qiatknQQey3ZVDU",
+        auth_plugin='mysql_native_password'
     )
 
     main = mydbs.cursor()
