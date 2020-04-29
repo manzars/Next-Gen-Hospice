@@ -78,9 +78,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'hospice',
-        'USER': 'root',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'USER': 'django_hospice',
+        'PASSWORD': 'qiatknQQey3ZVDU',
+        'HOST': 'django-hospice.cljfgmgwfhdv.us-east-2.rds.amazonaws.com',
         'PORT': '3306'
 
     }
